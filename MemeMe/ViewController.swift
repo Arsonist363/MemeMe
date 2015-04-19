@@ -18,7 +18,7 @@ UINavigationControllerDelegate{
     
     // Custome Text Attributes
     let memeTextAttributes = [
-        NSStrokeColorAttributeName : UIColor.blackColor(),
+        NSStrokeColorAttributeName : UIColor.whiteColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName : 6
@@ -67,6 +67,13 @@ UINavigationControllerDelegate{
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.cameraCaptureMode = .Photo
         self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func activity(sender: AnyObject) {
+        let image = UIImage()
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.presentViewController(activityController, animated:true, completion:nil)
+        
     }
 }
 
