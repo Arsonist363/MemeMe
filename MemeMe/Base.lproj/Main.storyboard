@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -43,15 +43,15 @@
                                 <items>
                                     <barButtonItem image="share" id="ZTQ-np-eDp">
                                         <connections>
-                                            <action selector="activity:" destination="vXZ-lx-hvc" id="yQe-0Q-pIZ"/>
+                                            <action selector="activity:" destination="vXZ-lx-hvc" id="QtP-pS-xga"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fsg-Am-KFa"/>
                                     <barButtonItem image="cancel" id="8wp-J2-Ne4"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Irc-1w-pYd">
-                                <rect key="frame" x="252" y="106" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Irc-1w-pYd">
+                                <rect key="frame" x="0.0" y="106" width="600" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -59,8 +59,8 @@
                                     <outlet property="delegate" destination="Fsg-Am-KFa" id="zWE-68-n7Y"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgJ-tE-PgB">
-                                <rect key="frame" x="252" y="482" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgJ-tE-PgB">
+                                <rect key="frame" x="0.0" y="482" width="600" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -89,8 +89,10 @@
                     <connections>
                         <outlet property="ImagePickerView" destination="c2O-h4-dmJ" id="md3-hw-Cse"/>
                         <outlet property="bottomTextField" destination="zgJ-tE-PgB" id="9vk-9P-wfg"/>
+                        <outlet property="bottomToolbar" destination="z4q-0G-epn" id="o3A-hH-y2k"/>
                         <outlet property="cameraButton" destination="uv8-rz-nOH" id="8qz-GF-TGW"/>
                         <outlet property="topTextField" destination="Irc-1w-pYd" id="LF3-z7-Uxj"/>
+                        <outlet property="topToolbar" destination="dIh-yg-uay" id="Bdb-5K-ad1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -16,8 +16,8 @@ UINavigationControllerDelegate, UITextFieldDelegate{
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    
-    
+    @IBOutlet weak var topToolbar: UIToolbar!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     
     // Custome Text Attributes
     let memeTextAttributes = [
@@ -41,11 +41,9 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         
         //change the tex fiels properties
         
-        topTextField.text = "TOP"
         topTextField.textAlignment = .Center
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.delegate = self
-        bottomTextField.text = "BOTTOM"
         bottomTextField.textAlignment = .Center
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.delegate = self
@@ -88,14 +86,23 @@ UINavigationControllerDelegate, UITextFieldDelegate{
     }
     
     @IBAction func activity(sender: AnyObject) {
-        let image = UIImage()
-        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let memedImage = self.generateMemedImage()
+        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityController.completionWithItemsHandler = {
+            (s: String!, ok: Bool, items: [AnyObject]!, err:NSError!) -> Void in
+            self.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         self.presentViewController(activityController, animated:true, completion:nil)
         
     }
+    
     func keyboardWillShow(notification: NSNotification) {
-        
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        //change view only on bottom textfield
+        if self.bottomTextField.isFirstResponder() == true {
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     func keyboardWillHide(notification: NSNotification)
@@ -111,7 +118,13 @@ UINavigationControllerDelegate, UITextFieldDelegate{
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        // Erase default text.
+        if topTextField.text == "TOP"{
         textField.text = ""
+        }
+        if bottomTextField.text == "BOTTOM"{
+            textField.text = ""
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -138,6 +151,38 @@ UINavigationControllerDelegate, UITextFieldDelegate{
                 self.view.frame = initialViewRect
             });
         }
+    }
+    struct Meme {
+        var topText: String?
+        var bottomText: String?
+        var Image = UIImage()
+        var memeImage = UIImage()
+    }
+    
+    func save() {
+        //Save  the meme
+        var meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, Image: self.ImagePickerView.image!, memeImage: self.generateMemedImage())
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        //Hide toolbar and navbar
+        self.topToolbar.hidden = true
+        self.bottomToolbar.hidden = true
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        //Show toolbar and navbar
+        self.topToolbar.hidden = false
+        self.bottomToolbar.hidden = false
+
+        return memedImage
     }
     
 }
