@@ -27,7 +27,6 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         NSStrokeWidthAttributeName : -3
     ]
     
-    // Text Field Delegate objects
     
     
     override func viewDidLoad() {
@@ -51,7 +50,8 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         
         // Subscribe to keyboard notifications to allow the view to raise when necessary
         self.subscribeToKeyboardNotifications()
-    }
+        
+            }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
@@ -152,16 +152,18 @@ UINavigationControllerDelegate, UITextFieldDelegate{
             });
         }
     }
-    struct Meme {
-        var topText: String?
-        var bottomText: String?
-        var Image = UIImage()
-        var memeImage = UIImage()
-    }
+    
     
     func save() {
         //Save  the meme
-        var meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, Image: self.ImagePickerView.image!, memeImage: self.generateMemedImage())
+        var meme = AppDelegate.Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, Image: self.ImagePickerView.image!, memeImage: self.generateMemedImage())
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+        println(appDelegate.memes)
     }
     
     func generateMemedImage() -> UIImage {
@@ -183,6 +185,12 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         self.bottomToolbar.hidden = false
 
         return memedImage
+    }
+    struct Meme {
+        var topText: String?
+        var bottomText: String?
+        var Image = UIImage()
+        var memeImage = UIImage()
     }
     
 }
