@@ -26,3 +26,4 @@ class Meme {
         self.memeImage = memeImage
     }
 }
+

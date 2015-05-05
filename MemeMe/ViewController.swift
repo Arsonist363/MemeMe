@@ -11,6 +11,12 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate{
     
+    var memes: [Meme]!
+    
+    //temp test case
+    //var Temp = Meme(topText: "This is a test Case", bottomText: "Not ment for Viewing", image: UIImage(named: "LaunchImage")!, memeImage: UIImage(named: "LaunchImage")!)
+    
+    
     // Outlets
     @IBOutlet weak var ImagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -18,6 +24,7 @@ UINavigationControllerDelegate, UITextFieldDelegate{
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     // Custome Text Attributes
     let memeTextAttributes = [
@@ -27,16 +34,33 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         NSStrokeWidthAttributeName : -3
     ]
     
+    var showTableView = false
+    var allowEdittext = false
+    var allowShare = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //check meme data
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        memes = appDelegate.memes
+        
+        //addes test case to memes to check presentation of tableview
+        //appDelegate.memes.append(Temp)
+        
+        //Checks for memes if found returns the tableview
+        if appDelegate.memes.count > 0 {
+            showTableView = true
+        }
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //check if camera is availible
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        
+        shareButton.enabled = allowShare
         //change the text field properties
         //top
         topTextField.textAlignment = .Center
@@ -52,7 +76,19 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         // Subscribe to keyboard notifications to allow the view to raise when necessary
         self.subscribeToKeyboardNotifications()
         
+        
     }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        //returns table view
+        if showTableView {
+            self.showAllMeme()
+            showTableView = false
+        }
+    }
+    
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
@@ -75,16 +111,26 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         // Allow image to be cropped
         imagePicker.allowsEditing = true
         
+        // Allows for textfield edit and sharebutton
+        allowEdittext = true
+        allowShare = true
+        
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func cameraImagePicker(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        
         // Allow image to be cropped
         imagePicker.allowsEditing = true
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.cameraCaptureMode = .Photo
+        
+        // Allows for textfield edit and sharebutton
+        allowEdittext = true
+        allowShare = true
+        
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -124,6 +170,13 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
     }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        // prevents text from being edited
+        return allowEdittext;
+    }
+    
+    
     
     func textFieldDidBeginEditing(textField: UITextField) {
         // Erase default text.
@@ -205,6 +258,8 @@ UINavigationControllerDelegate, UITextFieldDelegate{
         controller = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarview") as! UITabBarController
         self.presentViewController(controller, animated: true, completion: nil)
     }
+    
+   
     
 }
 
