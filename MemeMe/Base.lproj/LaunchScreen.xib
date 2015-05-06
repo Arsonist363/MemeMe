@@ -27,6 +27,10 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Cesar Colorado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Azs-eD-8eh">
                     <rect key="frame" x="161" y="439" width="159" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="159" id="7Rn-Ou-wTT"/>
+                        <constraint firstAttribute="height" constant="21" id="Rff-cm-Q9P"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -37,11 +41,9 @@
                 <constraint firstAttribute="bottom" secondItem="Azs-eD-8eh" secondAttribute="bottom" constant="20" id="0Xg-Gs-jn6"/>
                 <constraint firstAttribute="trailing" secondItem="AwX-ob-Mf9" secondAttribute="trailing" id="1Ha-5Y-5QF"/>
                 <constraint firstItem="AwX-ob-Mf9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1Qf-mM-QGM"/>
-                <constraint firstItem="Azs-eD-8eh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="161" id="7c8-2W-HiT"/>
                 <constraint firstAttribute="centerX" secondItem="Azs-eD-8eh" secondAttribute="centerX" id="H3t-OQ-gdb"/>
                 <constraint firstItem="AwX-ob-Mf9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Q9T-Ot-lNc"/>
                 <constraint firstAttribute="bottom" secondItem="AwX-ob-Mf9" secondAttribute="bottom" id="qBY-4a-TOV"/>
-                <constraint firstAttribute="trailing" secondItem="Azs-eD-8eh" secondAttribute="trailing" constant="160" id="qvI-ki-pZH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
